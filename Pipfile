@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+django = "==1.11.*"
+celery = "==3.1.*"
+redis = "==2.10.3"
+robot = "*"
+robotframework = "==3.1.2"
+robotframework-sshlibrary = "*"
+robotbackgroundlogger = "*"
+sshtunnel = "*"
+apache-libcloud = "*"
+deepdiff = "*"
+pyyaml = "*"
+cryptography = "==2.9.2"
+pexpect = "*"
+gitpython = "==2.1.15"
+
+[requires]
+python_version = "2.7"

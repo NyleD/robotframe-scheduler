@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+
+<link rel="stylesheet" href="{% static '/main.scss' %}">
+
+<br></br> 
+
+<div class="row justify-content-center"">
+    <nav class="navbar navbar-light small" style="background-color: #698885;">
+        <h6>JOB TYPE&nbsp&nbsp</h6>
+
+        {% for each_job_group in job_groups %}
+        <span class="d-inline-block" data-toggle="popover" data-content="Disabled popover">
+          {% if each_job_group == job_group_selected %}
+            <a class="dropdown-item" href="{% url 'job_group' each_job_group %}" style="background-color: #AFC8C4;">{{ each_job_group }} </a>
+          {% else %}
+            <a class="dropdown-item" href="{% url 'job_group' each_job_group %}" style="background-color: #E3F2FD;">{{ each_job_group }} </a>
+          {% endif %}
+        </span>
+        {% endfor %}
+    </nav>
+
+    <div class="dropdown "style="padding-left: 100px; padding-right: 50px;">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Refresh Git
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        {% with master="master" %} 
+        <a class="dropdown-item" href="{% url 'git_branch' master %}">master</a>
+        {% endwith %}
+        {% with feature="feature" %} 
+        <a class="dropdown-item" href="{% url 'git_branch' feature %}">release/5.1.1</a>
+        {% endwith %}
+      </div>
+    </div>
+</div>
+<br></br>
+<br></br>
+<div class="row">
+{% if job_group_selected %}
+{% if job_group_selected != 'custom'%}
+       <h3 style="padding-left: 10px; padding-right: 10px;">Job List</h3>
+{% else%}
+        <h3 style="padding-left: 10px; padding-right: 10px;">Feature List </h3> 
+{% endif %}
+      <br></br>
+      <h3 style="padding-left: 445px; padding-right: 50px;">Test Suite List</h3>
+</div>
+
+
+<div class="row">
+<div class="col-md secondrow " style="background-color: #E3F2FD;" >
+    <nav class="navbar navbar-light small " style="background-color: #E3F2FD;">
+    {% for each_job_run_list in job_run_list %}
+    {% if each_job_run_list == job_feature_selected %}
+    <a class="dropdown-item" href="{% url 'job_feature' job_group_selected each_job_run_list %}" style="background-color:#AFC8C4">{{ each_job_run_list }} </a>
+    {% else %}
+      <a class="dropdown-item" href="{% url 'job_feature' job_group_selected each_job_run_list %}">{{ each_job_run_list }} </a>
+    {% endif %}
+    {% endfor %}
+    </nav>
+</div>
+
+
+
+<br></br>
+<div class="col-md secondrow" style="background-color: #E3F2FD;">
+    <nav class="navbar navbar-light small" style="background-color: #E3F2FD;">
+    {% for each_test_suite_list in test_suite_list %}
+    {% if each_test_suite_list == job_testsuite_selected %}
+    <a class="dropdown-item" href="{% url 'job_testsuite' job_group_selected job_feature_selected each_test_suite_list %}"  style="background-color:#AFC8C4">{{ each_test_suite_list }} </a>
+    {% else %}
+      <a class="dropdown-item" href="{% url 'job_testsuite' job_group_selected job_feature_selected each_test_suite_list %}">{{ each_test_suite_list }} </a>
+    {% endif %}
+    {% endfor %}
+</div>
+</div>
+
+{% endif %}
+
+
+<br></br>
+{%  if job_group_selected %}
+{%  if job_group_selected != 'custom' %}
+  <h3>Test Case List</h3>
+  <div class="thirdrow" style="background-color: #E3F2FD;">
+      <nav class="navbar navbar-light small" style="background-color: #E3F2FD;">
+  		{% for each_test_case_list in test_case_list %}
+  		    <a class="dropdown-item">{{ each_test_case_list }} </a>
+  		{% endfor %}
+  </div>
+{% else %}
+
+
+<h3>Test Case List</h3>
+  <div class="style="background-color: #E3F2FD;"">
+  <form name="Add Job" method="post" action="{% url 'job_robot_add' job_group_selected job_feature_selected job_testsuite_selected%}">
+  {% csrf_token %}
+
+  
+  <select class="navbar navbar-light small thirdrow " multiple="multiple" name='testcase' id='testcase' style="background-color: #E3F2FD;">
+  {% for each_test_case_list in test_case_list %}
+  <option style="color: #212529; padding: .25rem 1.5rem;">{{ each_test_case_list }}</option>
+  {% endfor %}
+  </select>
+  </div>
+{% endif %}
+{% endif %}
+<br></br>
+
+{% if job_group_selected != 'custom' and job_testsuite_selected %}
+  <a href="{% url 'job_robot_run' job_group_selected %}"
+                 class="btn btn-primary">
+    Run Job
+  {% elif job_group_selected %}
+    
+    <input type="hidden" name="Add Job" />
+    <!--<button type="submit" value="Add Job" /> !-->
+    <button type="submit" class="btn btn-success">Add Job</button>
+    </form>
+
+  {% endif %}
+  </a>
+<br></br>
+{% if job_added_flag %}
+  <div class="col-md " style="background-color: #E3F2FD;">
+    <h3>Job List</h3>
+      <nav class="navbar navbar-light small" style="background-color: #E3F2FD;">
+      {% for feature_name, testsuite_name in added_jobs %}
+          <a class="dropdown-item">{{ feature_name }}<--->{{testsuite_name}}</a>
+      {% endfor %}
+  </div>
+  <br></br>
+  <div>
+  <a href="{% url 'job_robot_custom_run' %}"
+                 class="btn btn-primary">
+    Run Job
+  </a>
+  </div>
+{% endif %}
+
+
+{% endblock %}
+

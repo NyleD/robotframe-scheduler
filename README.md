@@ -1,6 +1,6 @@
 
 
-# UI Job Scheduler & Reporting for Robot Framework (QA) 
+# Robot Framework (Test Automation) Job Scheduler & Reporting (Web App)
 #### Prototype used @ Cloud Genix Networking Team (https://www.cloudgenix.com/)
 #### Developed at the Palo Alto Networks Hackathon 2020 (24 hours)
 

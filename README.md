@@ -4,7 +4,7 @@
 #### Prototype used @ Cloud Genix Networking Team (https://www.cloudgenix.com/)
 #### Developed at the Palo Alto Networks Hackathon 2020 (24 hours)
 
-1) Set up "lib.django.robot_execute" with a function to track directory of testcases or github repository
+1) Set up "lib.django.robot_execute" with a function to track directory of testcases or github repository RobotService()
 2) Set Up with Django and Run
 
 GO TO http://127.0.0.1:8000/robotjobs/scheduler/

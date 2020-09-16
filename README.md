@@ -1,7 +1,8 @@
 
 
 # UI Job Scheduler & Reporting for Robot Framework (QA) 
-#### Prototype used @ Cloud Genix Networking Team  
+#### Prototype used @ Cloud Genix Networking Team (https://www.cloudgenix.com/)
+#### Developed at the Palo Alto Networks Hackathon 2020
 
 1) Set up "lib.django.robot_execute" with a function to retrive data from you testing directory or github repository
 2) Set Up with Django and Run

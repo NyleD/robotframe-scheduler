@@ -16,7 +16,7 @@ Job Scheduler:
 - Running custom selection of testcases
 - Running Test Cases by filtering on Job List, Test Suites and Features
   - For example you can run Route Manager ClI Tests under the Routing Feature List, you can run VPN tests cases (many more), or you can mix and match various test       cases from different feature list to create a custom job
-- All testcases run as background processes using Celery and Redis to pass messages between a Django and Celery workers
+- All testcases run as background processes using Celery and Redis to pass messages between Django and Celery workers
 - The RobotService() is not in this code, but is the underlying service that runs testcases and reports various statuses for all jobs
 
 Job Results View (Can only be viewed, if you have your own RobotService running):

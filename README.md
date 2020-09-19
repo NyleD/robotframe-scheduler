@@ -24,6 +24,6 @@ Job Results View (Can only be viewed, if you have your own RobotService running)
 - Shows progress of each test case, if you want to dive deeper (PASS, FAIL,  RUNNING)
 
 Completed Jobs (Can only be viewed, if you have your own RobotService running): 
-- Some thing as Job Results View, but only for Completed Jobs
+- Same thing as Job Results View, but only for Completed Jobs
 
 
